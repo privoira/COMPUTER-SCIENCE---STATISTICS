@@ -1,0 +1,42 @@
+Normal7 = function(mu1,mu2,mu3,sigma1,sigma2,sigma3,color1,color2,color3,background,foreground,axis_color,labes_color)
+{
+mu1 = readline(prompt='Please enter the mean of the first distribution: ')
+mu2 = readline(prompt='Please enter the mean of the second distribution: ')
+mu3 = readline(prompt='Please enter the mean of the third distribution: ')
+sigma1 = readline(prompt='Please enter the standard deviation of the first distribution: ')
+sigma2 = readline(prompt='Please enter the standard deviation of the second distribution: ')
+sigma3 = readline(prompt='Please enter the standard deviation of the third distribution: ')
+background = readline(prompt='Please enter background color: ')
+foreground = readline(prompt='Please enter foreground color: ')
+axis_color = readline(prompt='Please enter axis color: ')
+labes_color = readline(prompt='Please enter labels color: ')
+color1 = readline(prompt='Please enter the color of the first graph: ')
+color2 = readline(prompt='Please enter the color of the second graph: ')
+color3 = readline(prompt='Please enter the color of the third graph: ')
+mu1 = as.numeric(mu1)
+mu2 = as.numeric(mu2)
+mu3 = as.numeric(mu3)
+sigma1 = as.numeric(sigma1)
+sigma2 = as.numeric(sigma2)
+sigma3 = as.numeric(sigma3)
+x = seq(0,50,0.1)
+y = (1/(sigma1*(2*pi)^0.5))*exp(-(1/(2*sigma1^2))*(x-mu1)^2)
+y2 = (1/(sigma2*(2*pi)^0.5))*exp(-(1/(2*sigma2^2))*(x-mu2)^2)
+y3 = (1/(sigma3*(2*pi)^0.5))*exp(-(1/(2*sigma3^2))*(x-mu3)^2)
+par(bg=background, fg = foreground, col.axis = axis_color, col.lab = labes_color)
+plot(x,y,type='l',lwd=3)
+lines(x,y2,type='l',lwd=3)
+lines(x,y3,type='l',lwd=3)
+
+polygon(x = c(0, x, 50),
+        y = c(0, (1/(sigma1*(2*pi)^0.5))*exp(-(1/(2*sigma1^2))*(x-mu1)^2), 0),
+        col=color1)
+polygon(x = c(0, x, 50),
+        y = c(0, (1/(sigma2*(2*pi)^0.5))*exp(-(1/(2*sigma2^2))*(x-mu2)^2), 0),
+        col=color2)
+polygon(x = c(0, x, 50),
+        y = c(0, (1/(sigma3*(2*pi)^0.5))*exp(-(1/(2*sigma3^2))*(x-mu3)^2), 0),
+        col=color3)
+
+legend(0, 0.12, legend=c('Distribuzione 1', 'Distribuzione 2', 'Distribuzione 3'), col=c(color1, color2, color3), lwd=5, lty=2:3, cex=1)
+}
